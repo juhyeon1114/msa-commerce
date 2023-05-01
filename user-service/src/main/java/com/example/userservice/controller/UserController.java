@@ -1,6 +1,7 @@
 package com.example.userservice.controller;
 
 import com.example.userservice.dto.UserDto;
+import com.example.userservice.model.UserEntity;
 import com.example.userservice.service.UserService;
 import com.example.userservice.vo.Greeting;
 import com.example.userservice.vo.RequestUser;
@@ -12,6 +13,9 @@ import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/user-service")
@@ -45,6 +49,21 @@ public class UserController {
         ResponseUser responseUser = mapper.map(user, ResponseUser.class);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(responseUser);
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<List<ResponseUser>> getUsers() {
+        Iterable<UserEntity> allUsers = userService.getAllUsers();
+        List<ResponseUser> results = new ArrayList<>();
+        allUsers.forEach(u -> {
+            results.add(new ModelMapper().map(u, ResponseUser.class));
+        });
+        return ResponseEntity.status(HttpStatus.OK).body(results);
+    }
+
+    @GetMapping("/users/{userId}")
+    public UserDto getUserByUserId(@PathVariable("userId") String userId) {
+        return userService.getUserById(userId);
     }
 
 }
