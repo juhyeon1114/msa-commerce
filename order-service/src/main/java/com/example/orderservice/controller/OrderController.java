@@ -8,7 +8,6 @@ import com.example.orderservice.vo.ResponseOrder;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +20,7 @@ import java.util.List;
 @RequestMapping("/order-service")
 public class OrderController {
 
-    Environment env;
-    OrderService orderService;
+    private final OrderService orderService;
 
     @PostMapping("/{userId}/orders")
     public ResponseEntity<ResponseOrder> createOrder(
