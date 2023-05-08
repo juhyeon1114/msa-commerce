@@ -5,6 +5,7 @@ import com.example.userservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,10 +20,11 @@ public class WebSecurity {
 
     private final UserService userService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final Environment env;
 
     @Bean
     public CustomAuthenticationFilter getAuthenticationFilter(HttpSecurity http) throws Exception {
-        CustomAuthenticationFilter authenticationFilter = new CustomAuthenticationFilter();
+        CustomAuthenticationFilter authenticationFilter = new CustomAuthenticationFilter(userService, env);
         authenticationFilter.setAuthenticationManager(getAuthenticationManager(http));
         return authenticationFilter;
     }
