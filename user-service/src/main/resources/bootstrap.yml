@@ -1,0 +1,5 @@
+spring:
+  cloud:
+    config:
+      uri: http://127.0.0.1:8888 # config서버의 주소
+      name: ecommerce # 파일(또는 서비스) 이름

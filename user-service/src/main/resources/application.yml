@@ -28,6 +28,12 @@ eureka:
 greeting:
   message: "Welcome"
 
-token:
-  expiration_time: 86400000 # 1일
-  secret: HelloSecretTokenTestHelloSecretTokenTestHelloSecretTokenTest
+#token:
+#  expiration_time: 86400000 # 1일
+#  secret: HelloSecretTokenTestHelloSecretTokenTestHelloSecretTokenTest
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans

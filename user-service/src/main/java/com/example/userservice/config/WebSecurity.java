@@ -44,7 +44,7 @@ public class WebSecurity {
         http
                 .addFilter(getAuthenticationFilter(http))
                 .authorizeHttpRequests()
-                .requestMatchers("/", "/users", "/login").permitAll()
+                .requestMatchers("/", "/users", "/login", "/actuator/**").permitAll()
                 .anyRequest().authenticated();
 //        http.formLogin();
 
