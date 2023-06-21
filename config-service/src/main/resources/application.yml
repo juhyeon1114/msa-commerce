@@ -10,3 +10,6 @@ spring:
       server:
         git:
           uri: file:///home/kai/apps/msa-commerce/git-local-repo
+#          uri: https://github.com/joneconsulting/spring-cloud-conf # 이렇게 remote git repository를 설정할 수도 있다.
+#          username: {username} # private repo일 경우
+#          password: {password} # private repo일 경우
